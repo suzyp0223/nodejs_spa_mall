@@ -14,11 +14,17 @@ const requestMiddleware = (req, res, next) => {
     next();
 };
 
+
+app.use(express.static("static"));
 app.use(express.json());
+
+//바디데이터를 해석해주는 미드웨어
+app.use(express.urlencoded());
 app.use(requestMiddleware);
 
+
 // app.use("/api", [goodsRouter, userRouter]); //   /api라는 경로로 goodsRouter,userRouter실행
-app.use("/api", [goodsRouter, cartsRouter]); //   /api라는 경로가 겹치면 앞에걸 먼저 실행
+app.use("/api", [goodsRouter, cartsRouter]); //   /api라는 경로가 겹치면 앞에 걸 먼저 실행
 
 
 app.get('/', (req, res) => {
